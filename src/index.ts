@@ -15,22 +15,14 @@ app.set("views", path.join(__dirname, "views"));
 // Static files
 app.use(express.static(path.join(__dirname, "public")))
 
-app.get("/", (_req: Request, res: Response) => {
-    // res.send("Express + TypeScript Server");
-    res.render("index", {
-        title: "Home",
-        message: "Hello World!",
-    });
-});
-
-app.get("/sheet", async (_req: Request, res: Response) => {
+app.get("/", async (_req: Request, res: Response) => {
     try {
         const spreadsheetId = process.env.SPREADSHEET_ID || "default_spreadsheet_id";
         const range = process.env.SPREADSHEET_RANGE || "default_range";
         const data = await fetchGoogleSheetData(spreadsheetId, range);
         res.render("sheet", {
-            title: "Google Sheet",
-            message: "Google Sheet Data",
+            title: "DnD Quotes",
+            message: "DnD Quotes",
             spreadsheet_data: data,
         });
     } catch (error) {

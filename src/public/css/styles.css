@@ -14,47 +14,45 @@ h1 {
     text-shadow: 1px 1px 2px #000;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    background-color: #f4e8c1; /* Subtle background color */
-    border: none; /* Remove border */
-    box-shadow: none; /* Remove box-shadow */
-}
-
-thead, tbody, tr, th, td {
-    background-color: #f4e8c1; /* Ensure all elements have the same background color */
-    border: none; /* Remove border */
-}
-
-tbody tr {
+/* src/public/css/styles.css */
+.articles {
     display: flex;
     flex-direction: column;
-    margin-bottom: 10px;
-    padding: 10px;
+    align-items: center; /* Center the articles */
+    gap: 20px;
 }
 
-tbody tr:nth-child(even) {
-    background-color: #f4e8c1; /* Same subtle background color */
+article {
+    background-color: #fff8e1;
+    padding: 20px;
+    border: 1px solid #7b3f00;
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: left;
+    max-width: 600px; /* Set a maximum width */
+    width: 100%; /* Ensure it takes full width on smaller screens */
 }
 
-tbody td {
-    padding: 5px 0;
-    color: #3e2723; /* Lighter text color */
+@media (max-width: 600px) {
+    article {
+        max-width: 100%; /* Allow full width on smaller screens */
+    }
 }
 
-tbody td:nth-child(1) {
-    font-weight: bold;
-    color: #5d4037; /* Lighter text color */
+article header h2 {
+    margin: 0;
+    color: #5d4037;
+    text-align: left; /* Ensure header text is aligned to the left */
 }
 
-tbody td:nth-child(2) {
-    font-style: italic;
-    color: #3e2723; /* Lighter text color */
+article p {
+    margin: 10px 0;
+    color: #3e2723;
+    text-align: left; /* Ensure paragraph text is aligned to the left */
 }
 
-tbody td:nth-child(3) {
-    text-align: right;
-    color: #5d4037; /* Lighter text color */
+article footer p {
+    margin: 0;
+    text-align: left; /* Ensure footer text is aligned to the left */
+    color: #5d4037;
 }

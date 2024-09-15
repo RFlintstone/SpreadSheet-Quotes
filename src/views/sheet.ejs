@@ -1,3 +1,4 @@
+<!-- src/views/sheet.ejs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,30 +8,50 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <h1><%= message %></h1>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Timestamp</th>
-                <th>Quote</th>
-                <th>Made by</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% if (spreadsheet_data && spreadsheet_data.length > 0) { %>
-                <% spreadsheet_data.forEach(row => { %>
-                    <tr>
-                        <td><%= row[0] %></td>
-                        <td><%= row[2] %></td>
-                        <td><%= row[3] %></td>
-                    </tr>
-                <% }) %>
-            <% } else { %>
-                <tr>
-                    <td colspan="4">No data available</td>
-                </tr>
-            <% } %>
-        </tbody>
-    </table>
+<h1><%= message %></h1>
+<div class="articles">
+    <%
+    const dummyData = [
+        {
+            quote: 'Sample Quote 1',
+            author: 'Sample Author 1',
+            date: '01-01-2023',
+            timestamp: '01-01-2023'
+        },
+        {
+            quote: 'Sample Quote 2',
+            author: 'Sample Author 2',
+            date: '02-01-2023',
+            timestamp: '02-01-2023'
+        }
+    ];
+    const data = spreadsheet_data && spreadsheet_data.length > 0 ? spreadsheet_data : dummyData;
+
+    // Parse dates and sort data
+    const parseDate = (dateStr) => {
+        const [day, month, year] = dateStr.split('/');
+        return new Date(`${month}/${day}/${year}`);
+    };
+
+    const parsedData = data.map(row => {
+        const date = row.date ? parseDate(row.date) : (row[4] ? parseDate(row[4]) : null);
+        const timestamp = row.timestamp ? parseDate(row.timestamp) : (row[0] ? parseDate(row[0]) : null);
+        const displayDate = date && timestamp && date.getTime() !== timestamp.getTime() ? date : timestamp;
+        return {...row, displayDate};
+    }).sort((a, b) => b.displayDate - a.displayDate);
+
+    parsedData.forEach(row => {
+    %>
+        <article>
+            <header>
+                <h2><%= row.title || row[2] %></h2>
+            </header>
+            <footer>
+                <p>Quote by: <%= row.author || row[3] %></p>
+                <p>Date: <%= isNaN(row.displayDate) ? 'Invalid Date' : row.displayDate.toLocaleDateString() %></p>
+            </footer>
+        </article>
+    <% }) %>
+</div>
 </body>
 </html>
