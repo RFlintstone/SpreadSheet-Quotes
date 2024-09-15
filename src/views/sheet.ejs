@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1><%= message %></h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>Quote</th>
+                <th>Made by</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (spreadsheet_data && spreadsheet_data.length > 0) { %>
+                <% spreadsheet_data.forEach(row => { %>
+                    <tr>
+                        <td><%= row[0] %></td>
+                        <td><%= row[2] %></td>
+                        <td><%= row[3] %></td>
+                    </tr>
+                <% }) %>
+            <% } else { %>
+                <tr>
+                    <td colspan="4">No data available</td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</body>
+</html>
