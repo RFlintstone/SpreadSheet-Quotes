@@ -6,7 +6,7 @@ import {fetchGoogleSheetData} from "./services/googleSheetsService";
 dotenv.config();
 
 const app: Express = express();
-const port = process.env.PORT || 3000;
+const port = parseInt(process.env.PORT || "3000", 10);
 
 // View engine setup
 app.set("view engine", "ejs");
@@ -40,6 +40,6 @@ app.get("/", async (_req: Request, res: Response) => {
     }
 });
 
-app.listen(port, () => {
+app.listen(port, '0.0.0.0', () => {
     console.log(`[server]: Server is running at http://localhost:${port}`);
 });
