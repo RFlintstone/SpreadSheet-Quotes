@@ -20,7 +20,7 @@ RUN npm run build
 
 # Copy the views and public directory to the dist directory
 RUN cp -r src/views dist/views
-RUN cp -r /public dist/public
+RUN cp -r public/ dist/public
 
 # Expose the application port
 EXPOSE 3000
