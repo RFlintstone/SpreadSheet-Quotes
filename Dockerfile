@@ -18,8 +18,9 @@ COPY . .
 # Build the TypeScript code
 RUN npm run build
 
-# Copy the views directory to the dist directory
+# Copy the views and public directory to the dist directory
 RUN cp -r src/views dist/views
+RUN cp -r src/public dist/public
 
 # Expose the application port
 EXPOSE 3000
